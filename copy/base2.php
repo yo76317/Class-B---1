@@ -3,21 +3,21 @@ date_default_timezone_set("Asia/Taipei");
 session_start();
 
 class DB{
-    protected $dsn="mysql:host=localhost;charset=utf8;dbname=web01";
+    protected $dsn="myssql:host=localhost;charset=utf8;dbname=ewb01";
     protected $user="root";
     protected $pw='';
     protected $table;
-    protected $pdo;
 
-     // table等於傳進來的table
+
+    // table等於傳進來的table
     public function __construct($table){
         $this->table=$table;
         $this->pdo=new PDO($this->dsn,$this->user,$this->pw);
     }
 
     public function find($id){
-        $sql="SELECT * FROM $this->table WHERE ";
-
+        $qsl="SELECT * FROM $this->table WHERE ";
+        
         // 如果不是陣列就是id，那你就找出id給我
         if(is_array($id)){
             // 把東西變成這樣
@@ -37,8 +37,7 @@ class DB{
     // 根據參數的個數來決定SWITCH裡面要怎麼處理
     public function all(...$arg){
         // table 這有個空白要加
-        $sql="SELECT * FROM $this->table ";
-
+        $qsl="SELECT * FROM $this->table ";
         switch(count($arg)){
             // 兩個，第一個必須為陣列，第二個是字串
             case 2:
@@ -58,19 +57,16 @@ class DB{
                     $sql .= " WHERE ".implode(" AND ".$arg[0]);
                 }else{
                     $sql .= $arg[1];
-                    
                 }
             break;
         }
-
-        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
 
     // 計算那個欄位，要用的什麼告訴我，條件是什麼
     public function math($method,$col,...$arg){
-        $sql="SELECT $method($col) FROM $this->table ";
-
+        $sql="SELECT $meethod($col) FROM $this ->table ";
         switch(count($arg)){
             // 兩個，第一個必須為陣列，第二個是字串
             case 2:
@@ -79,6 +75,7 @@ class DB{
                 }
                 // 第一個陣列參數，接空白，再接第二個參數
                 $sql .=" WHERE ".implode(" AND ".$arg[0])." ".$arg[1];
+
             break;
             // 只有一個，先判斷是否為陣列，陣列取前半段，字串取後半段
             case 1:
@@ -89,10 +86,8 @@ class DB{
                     $sql .= " WHERE ".implode(" AND ".$arg[0]);
                 }else{
                     $sql .= $arg[1];
-                    
                 }
             break;
-        }
         // 針對一個欄位，不用回傳全部
         return $this->pdo->query($sql)->fetchColumn();
     }
@@ -113,21 +108,22 @@ class DB{
                    WHERE `id`='{$array['id']}'";
         }else{
             // insert 先寫出語法再慢慢填入
-
             $sql="INSERT INTO $this->table (`".implode("`,`",array_keys($array))."`) 
                                      VALUES('".implode("','",$array)."')";
         }
         // 回傳筆數
         return $this->pdo->exec($sql);
     }
-    
+
+
 
     // 刪除
-    public function del($id){
-        $sql="DELETE FROM $this->table WHERE ";
+    public function del($array){
+        $qsl="DELETE * FROM $this->table WHERE ";
+        
         // 如果不是陣列就是id，那你就找出id給我
         if(is_array($id)){
-             // 把東西變成這樣
+            // 把東西變成這樣
             foreach($id as $key => $value){
                 $tmp[]="`$key`='$value'";
             }
@@ -136,37 +132,25 @@ class DB{
         }else{
             $sql .= " `id`='$id'";
         }
-        return $this->pdo->exec($sql);
+        return $this->pdo->ecev($sql);
     }
 
 
     // 複雜查詢(萬用)
     public function q($sql){
-        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
-
-
 }
+
 
 // 寫class DB外面，不用呼叫的
 function to($url){
     header("location:".$url);
 }
 
-$Title=new DB('title');
-$Ad=new DB('ad');
-$Mvim=new DB('mvim');
-$Image=new DB('image');
-$News=new DB('news');
-$Admin=new DB('admin');
-$Menu=new DB('menu');
-$Bottom=new DB('bottom');
-$Total=new DB('total'); 
 
 // 查看$total
 // $total=$total->find(1);
 // echo $total->(1)['total'];
 // echo $total['total'];
 // print_r($total->all());
-
-?>
