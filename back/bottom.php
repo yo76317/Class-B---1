@@ -8,7 +8,7 @@
                     <tr class="yel">
                     <td width="50%">頁尾版權資料管理:</td>
                     <td width="50%">
-                        <input type="number" name="bottom" value="<?=$Bottom->find(1)['bottom'];?>">
+                        <input type="text" name="bottom" value="<?=$Bottom->find(1)['bottom'];?>">
                     </td>
                     </tr>
                 </tbody>
