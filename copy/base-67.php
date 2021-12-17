@@ -108,6 +108,7 @@ class DB{
                    WHERE `id`='{$array['id']}'";
         }else{
             // insert 先寫出語法再慢慢填入
+
             $sql="INSERT INTO $this->table (`".implode("`,`",array_keys($array))."`) 
                                      VALUES('".implode("','",$array)."')";
         }

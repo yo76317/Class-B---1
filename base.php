@@ -102,8 +102,8 @@ class DB{
     public function save($array){
         // 在裡面的有ID，外面的沒ID，所以用判斷有無ID來決定
         if(isset($array['id'])){
-            //update
-            foreach($array[0] as $key => $value){
+            //update $array陣列不指定
+            foreach($array as $key => $value){
                 $tmp[]="`$key`='$value'";
                 // id在裡面看要不要加判斷式去掉id
             }
@@ -153,6 +153,7 @@ function to($url){
     header("location:".$url);
 }
 
+// 自定變數 = 導向到資料庫
 $Title=new DB('title');
 $Ad=new DB('ad');
 $Mvim=new DB('mvim');
@@ -168,5 +169,18 @@ $Total=new DB('total');
 // echo $total->(1)['total'];
 // echo $total['total'];
 // print_r($total->all());
+
+// 有存在才做事，不存在才做事所以用!not
+// 自定變數找到資料庫otal的值find(1)
+// 找到後再+1,+1後存回去
+// 接下來base.php會導到，前後端開頭，使其優於所有頁面
+if(!isset($_SESSION['total'])){
+    $total=$Total->find(1);
+    $total['total']++;
+    $Total->save($total);
+    // 這行是上述結束後產生一個SESSION叫total
+    // =後是因要=所以可隨意打
+    $_SESSION['total']=$total['total'];
+}
 
 ?>
