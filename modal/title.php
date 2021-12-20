@@ -1,9 +1,10 @@
 <h3>新增標題圖片</h3>
 <hr>
-<form action="" method="post" enctype="multipart/form-data">
+<form action="api/title.php" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>標題區圖片：</td>
+            <!-- name 對應的是資料表欄位 -->
             <td><input type="file" name="img" ></td>
         </tr>
         <tr>

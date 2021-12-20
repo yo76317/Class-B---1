@@ -217,6 +217,14 @@ function to($url){
     header("location:".$url);
 }
 
+function dd($array){
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
+}
+
+
+
 // 自定變數 = 導到資料庫
 $Total=new DB('total');
 $Bottom=new DB('bottom');
