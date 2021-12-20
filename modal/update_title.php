@@ -1,16 +1,13 @@
-<h3>新增標題區圖片</h3>
+<h3>更新標題區圖片</h3>
 <hr>
-<form action="api/title.php" method="post" enctype="multipart/form-data">
+<form action="api/update_title.php" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>標題區圖片：</td>
             <!-- name 對應的是資料表欄位 -->
             <td><input type="file" name="img" ></td>
         </tr>
-        <tr>
-            <td>標題區替代文字：</td>
-            <td><input type="text" name="text" ></td>
-        </tr>
+
     </table>
     <div><input type="submit" value="新增"><input type="reset" value="重置"></div>
 </form> 
