@@ -3,11 +3,9 @@
 <form action="" method="post" enctype="multipart/form-data">
     <table>
         <tr>
-            <td>標題區圖片:</td>
-            <td> type file ,name img</td>
-        </tr>
-        <tr>
-            <td>標題區替代文字:</td>
-            <td> type text ,name text</td>
+            <td>動態文字廣告：</td>
+            <td><input type="text" name="text" ></td>
         </tr>
     </table>
+    <div><input type="submit" value="新增"><input type="reset" value="重置"></div>
+</form> 

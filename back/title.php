@@ -18,10 +18,10 @@
                 <tbody>
                     <tr>
                         <td width="200px">
-                        <!-- 先找cover淡入,再找crv淡入,在crv載入網址view... -->
-                        <!-- 送一個網址到view.php再傳回到tiele -->
-                        <!-- modal/title.php -->
-                        <input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;view.php?do=ad&#39;)" value="新增網站標題圖片"></td><td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置">
+                            <!-- 先找cover淡入,再找crv淡入,在crv載入網址view... -->
+                            <!-- 送一個網址到view.php再傳回到tiele -->
+                            <!-- modal/title.php -->
+                            <input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/title.php&#39;)" value="新增網站標題圖片">
                         </td>
                         <td class="cent">
                             <input type="submit" value="修改確定">
