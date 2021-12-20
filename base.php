@@ -1,3 +1,4 @@
+
 <?php
 date_default_timezone_set("Asia/Taipei");
 session_start();
@@ -25,9 +26,9 @@ class DB{
     private function setStr($table){
         switch($table){
             case "title";
-                $this->title="網站標題管理";
-                $this->button="新增網站標題圖片";
-                $this->header="網站標題";
+            $this->title="網站標題管理";
+            $this->button="新增網站標題圖片";
+            $this->header="網站標題";
             break;
             case "ad";
             $this->title="動態文字廣告管理";
@@ -79,13 +80,13 @@ class DB{
 
         // 如果不是陣列就是id，那你就找出id給我
         if(is_array($id)){
-            // 把東西變成這樣
             foreach($id as $key => $value){
                 $tmp[]="`$key`='$value'";
             }
-            // 跟上面的串起來
+            // 把東西變成這樣
             $sql .= implode(" AND ",$tmp);
         }else{
+            // 跟上面的串起來
             $sql .= " `id`='$id'";
         }
 
@@ -130,7 +131,6 @@ class DB{
     // 計算那個欄位，要用的什麼告訴我，條件是什麼
     public function math($method,$col,...$arg){
         $sql="SELECT $method($col) FROM $this->table ";
-
         // 兩個，第一個必須為陣列，第二個是字串
         switch(count($arg)){
             case 2:
@@ -175,12 +175,14 @@ class DB{
                    WHERE `id`='{$array['id']}'";
         }else{
             // insert 先寫出語法再慢慢填入
+
             $sql="INSERT INTO $this->table (`".implode("`,`",array_keys($array))."`) 
                                      VALUES('".implode("','",$array)."')";
         }
         // 回傳筆數
         return $this->pdo->exec($sql);
     }
+
 
     // 刪除
     public function del($id){
@@ -201,13 +203,20 @@ class DB{
     }
 
 
-
     // 複雜查詢(萬用)
     public function q($sql){
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+}
 
+
+
+
+function dd($array){
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
 }
 
 
@@ -217,11 +226,6 @@ function to($url){
     header("location:".$url);
 }
 
-function dd($array){
-    echo "<pre>";
-    print_r($array);
-    echo "</pre>";
-}
 
 
 
@@ -240,9 +244,6 @@ $Menu=new DB('menu');
 //$tt=isset($_GET['do'])??'';
 $tt=$_GET['do']??'';
 switch($tt){
-    case "title":
-        $DB=$Title;
-    break;
     case "ad":
         $DB=$Ad;
     break;
@@ -267,6 +268,9 @@ switch($tt){
     case "menu":
         $DB=$Menu;
     break;
+    default:
+        $DB=$Title;
+    break;
 }
 // 查看$total
 // $total=$total->find(1);
@@ -286,6 +290,5 @@ if(!isset($_SESSION['total'])){
     // =後是因要=所以可隨意打
     $_SESSION['total']=$total['total'];
 }
-
 
 ?>
