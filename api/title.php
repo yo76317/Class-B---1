@@ -13,7 +13,7 @@ if(!empty($_FILES['img']['tmp_name'])){
 $data['text']=$_POST['text'];
 // 全部預設不顯示之後再手動設顯示
 $data['sh']=0;
-$Title->save($data);
+$DB->save($data);
 to("../back.php?do=".$Title->table)
 // dd($_POST);
 // dd($_FILES);

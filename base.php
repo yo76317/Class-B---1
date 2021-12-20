@@ -180,6 +180,7 @@ class DB{
                                      VALUES('".implode("','",$array)."')";
         }
         // 回傳筆數
+        echo $sql;
         return $this->pdo->exec($sql);
     }
 
