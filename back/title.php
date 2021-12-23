@@ -7,7 +7,7 @@
             <tbody>
                 <tr class="yel">
                     <td width="45%"><?=$DB->header;?></td>
-                    <td width="23%">替代文字</td>
+                    <td width="23%"><?=$DB->append;?></td>
                     <td width="7%">顯示</td>
                     <td width="7%">刪除</td>
                     <td></td>
@@ -59,8 +59,8 @@
                     <td width="200px">
                         <!-- 新增動態文字廣告 -->
                         <input type="button"
-                        onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/<?=$DB->table;?>.php?table=<?=$DB->table;?>&#39;)" 
-                              value="<?=$DB->button;?>">
+                        onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload.php?do=<?=$DB->table;?>&id=<?=$row['id'];?>&#39;)" 
+                              value="更新圖片">
                     </td>
                     <td class="cent">
                         

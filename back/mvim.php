@@ -28,7 +28,7 @@
                     <td>
                     <input type="hidden" name="id[]" value="<?=$row['id'];?>">
                     <input type="button"
-                            onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload_mvim.php?id=<?=$row['id'];?>&#39;)" 
+                    onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload.php?do=<?=$DB->table;?>&id=<?=$row['id'];?>&#39;)" 
                               value="更換動畫">
                     </td>
                 </tr>

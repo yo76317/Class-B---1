@@ -10,9 +10,19 @@
                     <td></td>
                 </tr>
                 <?php
-                $rows=$DB->all();
-                foreach($rows as $row){
-                    $checked=($row['sh']==1)?'checked':'';
+                // 如果用count要告訴全部有幾筆所以就用*，也可以用指定欄位
+                // 得到筆數資料，分區(頁)指定要有幾筆
+                // ceil取天花板(無條件進位) all/div
+                // 現在頁面-1=開始頁*div (從0開始是因為資料庫為陣列)
+                // limit 返回筆數
+                // limit 第幾筆,取幾筆
+                $all=$DB->math('count','*');
+                $div=3;
+                $pages=ceil($all/$div);
+                $now=$_GET['p']??1;
+                $start=($now-1)*$div;
+
+                $rows=$DB->all(" limit $start,$div");
                 ?>
                 <tr>
                     <td>
@@ -28,7 +38,7 @@
                     <td>
                     <input type="hidden" name="id[]" value="<?=$row['id'];?>">
                     <input type="button"
-                            onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload_<?=$DB->table;?>.php?id=<?=$row['id'];?>&#39;)" 
+                    onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload.php?do=<?=$DB->table;?>&id=<?=$row['id'];?>&#39;)" 
                               value="更換圖片">
                     </td>
                 </tr>
@@ -37,6 +47,19 @@
                 ?>
             </tbody>
         </table>
+
+        <!-- 分頁 -->
+        <div class="cent">
+            <?php
+                // 第一頁開始,顯示到幾頁,+1
+                for($i=1;);$i<=$pages;$i++){
+                    // echo "<a herf='?do=image&p=$i'> $i </a>";
+                    // 改用DB取代image,{}包起來以防萬一
+                    echo "<a herf='?do={$DB->table}&p=$i'> $i </a>";
+                }
+            ?>
+        </div>
+
         <table style="margin-top:40px; width:70%;">
             <tbody>
                 <tr>

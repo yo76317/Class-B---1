@@ -14,6 +14,7 @@ class DB{
     public $button;
     public $header;
     public $append;
+    public $upload;
 
     // table等於傳進來的$table
     public function __construct($table){
@@ -34,16 +35,19 @@ class DB{
             $this->title="動態文字廣告管理";
             $this->button="新增動態文字廣告";
             $this->header="動態文字廣告";
+            $this->upload="網站標題圖片";
             break;
             case "mvim";
             $this->title="動畫圖片管理";
             $this->button="新增動畫圖片";
             $this->header="動畫圖片";
+            $this->upload="動畫圖片2";
             break;
             case "image";
             $this->title="校園映像資料管理";
             $this->button="新增校園映像圖片";
             $this->header="校園映像資料圖片";
+            $this->upload="校園映像圖片";
             break;
             case "total";
             $this->title="進站總人數管理";
@@ -117,7 +121,7 @@ class DB{
                     }
                     $sql .= " WHERE ".implode(" AND ".$arg[0]);
                 }else{
-                    $sql .= $arg[1];
+                    $sql .= $arg[0];
                     
                 }
             break;
@@ -180,7 +184,7 @@ class DB{
                                      VALUES('".implode("','",$array)."')";
         }
         // 回傳筆數
-        echo $sql;
+        // echo $sql;
         return $this->pdo->exec($sql);
     }
 
