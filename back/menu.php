@@ -26,7 +26,9 @@
                     <td>
                         <input type="text" name="href[]" value="<?=$row['href'];?>">
                     </td>
-                    <td></td>
+                    <td>
+                    <?=$DB->math('count','*',['parent'=>$row['id']]);?>
+                    </td>
                     <td>
                         <input type="checkbox" name="sh[]" value="<?=$row['id'];?>" <?=$checked;?>>
                     </td>
@@ -37,7 +39,7 @@
                     </td>
                     <td>
                     <input type="button"
-                            onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload_<?=$DB->table;?>.php?id=<?=$row['id'];?>&#39;)" 
+                    onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/submenu.php?id=<?=$row['id'];?>&#39;)" 
                               value="編輯次選單">
                     </td>
 

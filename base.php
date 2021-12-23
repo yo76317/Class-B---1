@@ -110,7 +110,7 @@ class DB{
                     $tmp[]="`$key`='$value'";
                 }
                 // 第一個陣列參數，接空白，再接第二個參數
-                $sql .=" WHERE ".implode(" AND ".$arg[0])." ".$arg[1];
+                $sql .=" WHERE ".implode(" AND ",$tmp)." ".$arg[1];
 
             break;
             // 只有一個，先判斷是否為陣列，陣列取前半段，字串取後半段
@@ -119,7 +119,7 @@ class DB{
                     foreach($arg[0] as $key => $value){
                         $tmp[]="`$key`='$value'";
                     }
-                    $sql .= " WHERE ".implode(" AND ".$arg[0]);
+                    $sql .= " WHERE ".implode(" AND ",$tmp);
                 }else{
                     $sql .= $arg[0];
                     

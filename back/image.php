@@ -23,6 +23,8 @@
                 $start=($now-1)*$div;
 
                 $rows=$DB->all(" limit $start,$div");
+                foreach($rows as $row){
+                $checked=($row['sh']==1)?'checked':'';
                 ?>
                 <tr>
                     <td>
@@ -38,7 +40,7 @@
                     <td>
                     <input type="hidden" name="id[]" value="<?=$row['id'];?>">
                     <input type="button"
-                    onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload.php?do=<?=$DB->table;?>&id=<?=$row['id'];?>&#39;)" 
+                            onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload.php?do=<?=$DB->table;?>&id=<?=$row['id'];?>&#39;)" 
                               value="更換圖片">
                     </td>
                 </tr>
@@ -51,12 +53,35 @@
         <!-- 分頁 -->
         <div class="cent">
             <?php
+                // 分頁方向鍵 >
+                // // 假如now-1最多等於0 用>
+                 if(($now-1)>0){
+                    $p=$now-1;
+                    echo "<a href='?do={$DB->table}&p=$p'> &lt; </a>";   
+                }
+
+
                 // 第一頁開始,顯示到幾頁,+1
-                for($i=1;);$i<=$pages;$i++){
+                for($i=1;$i<=$pages;$i++){
+                    // 到了當前頁字加大
+                    if($i==$now){
+                        $fontsize="24px";
+                    }else{
+                        $fontsize="16px";
+                    }
                     // echo "<a herf='?do=image&p=$i'> $i </a>";
                     // 改用DB取代image,{}包起來以防萬一
-                    echo "<a herf='?do={$DB->table}&p=$i'> $i </a>";
+                    // 上面判斷決定變數長什麼樣子，下面輸出自動帶入，動態
+                    echo "<a href='?do={$DB->table}&p=$i' style='font-size:$fontsize'> $i </a>";
                 }
+
+                // 分頁方向鍵 >
+                // 假如now+1最多等於3 用<=
+                if(($now+1)<=$pages){
+                    $p=$now+1;
+                    echo "<a href='?do={$DB->table}&p=$p'> &gt; </a>";
+                }
+
             ?>
         </div>
 
