@@ -85,16 +85,31 @@ include_once "base.php";
                     onclick="lo(&#39;back.php&#39;)">管理登入</button>
                 <div style="width:89%; height:480px;" class="dbor">
                     <span class="t botli">校園映象區</span>
+                    
+                    <div class="t" onclick="pp(1)"><img src="icon/up.jpg"></div>
+                        <?php 
+                            $imgs=$Image->all(['sh'=>1]);
+                            foreach($imgs as $key => $img){
+                        ?>
+                        <div class="im cent" id="ssaa<?=$key;?>">
+                            <img src="img/<?=$img['img'];?>" style="width:150px;height:103px;border:3px solid orange;margin:1px">
+                        </div>
+                        <?php 
+                            }
+                        ?>
+                        <div class="t" class="t" onclick="pp(2)"><img src="icon/dn.jpg"></div>
+                    
+                    
                     <script>
                     var nowpage = 0,
-                        num = 0;
+                    num = <?=$Image->math("count","*",['sh'=>1]);?>;
 
                     function pp(x) {
                         var s, t;
                         if (x == 1 && nowpage - 1 >= 0) {
                             nowpage--;
                         }
-                        if (x == 2 && (nowpage + 1) * 3 <= num * 1 + 3) {
+                        if (x == 2 && (nowpage + 3) < num) {
                             nowpage++;
                         }
                         $(".im").hide()
