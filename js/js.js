@@ -3,9 +3,10 @@ $(document).ready(function(e) {
     $(".mainmu").mouseover(
 		function()
 		{
-			$(this).children(".mw").stop().show()
+			$(this).children(".mw").show()
 		}
 	)
+	// 離開時隱藏起來
 	$(".mainmu").mouseout(
 		function ()
 		{

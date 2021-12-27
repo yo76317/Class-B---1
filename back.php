@@ -82,7 +82,9 @@ include_once "base.php"
                                 	<tbody><tr>
                                     	<td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
 										<td>
-											<button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button>
+											<!-- document.cookie=&#39;user=&#39 用cookie紀錄，但我們用$_POST所以可刪除 -->
+											<!-- replace導頁用  &#39 = '  如果覺得煩可以直接改 ' -->
+											<button onclick="location.replace('index.php?=do=login')" style="width:99%; margin-right:2px; height:50px;">管理登出</button>
 										</td>
                                     </tr>
                                 </tbody></table>
