@@ -13,7 +13,7 @@ foreach($_POST['id'] as $key => $id){
     // 判斷id是否有在陣列內
     if(isset($_POST['del']) && in_array($id,$_POST['del'])){
         // 刪除-上述兩筆條件都成立就刪除~
-        $Ad->del($id);
+        $DB->del($id);
     }else{
         // 更新
         // $date['text']=$_POST['text'][$key];

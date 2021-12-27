@@ -59,8 +59,8 @@
                     <td width="200px">
                         <!-- 新增動態文字廣告 -->
                         <input type="button"
-                        onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/upload.php?do=<?=$DB->table;?>&id=<?=$row['id'];?>&#39;)" 
-                              value="更新圖片">
+                            onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;modal/<?=$DB->table;?>.php?table=<?=$DB->table;?>&#39;)" 
+                              value="<?=$DB->button;?>">
                     </td>
                     <td class="cent">
                         

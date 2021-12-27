@@ -2,13 +2,12 @@
 include_once "../base.php";
 ?>
 
-<h3>更新標題區圖片<?=$DB->upload;?></h3>
+<h3>更新<?=$DB->upload;?></h3>
 <hr>
 <form action="api/upload.php?do=<?=$DB->table;?>" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td><?=$DB->upload;?>：</td>
-            <!-- name 對應的是資料表欄位 -->
             <td><input type="file" name="img" ></td>
         </tr>
 
