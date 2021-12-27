@@ -1,26 +1,83 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0055)?do=meg -->
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<div class="di"
+    style="height:540px; border:#999 1px solid; width:53.2%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
+    <!-- include marquee -->
+    <?php include "marquee.php";?>
+    <div style="height:32px; display:block;"></div>
+    <span class="t botli">更多最新消息顯示區</span>
+    <!--正中央-->
+    <?php
+            $all=$DB->math('count','*');
+            $div=5;
+            $pages=ceil($all/$div);
+            $now=$_GET['p']??1;
+            $start=($now-1)*$div;
+        ?>
+        <ol style="list-style-type:decimal;" start="<?=($now-1)*$div+1;?>">
+        <?php
+            $rows=$DB->all(" limit $start,$div");
+            foreach($rows as $n){
+                echo "<li class='sswww'>";
+                echo mb_substr($n['text'],0,20);
+                echo "<div class='all' style='display:none'>{$n['text']}</div>";
+                echo "</li>";
+            }
 
-<title>卓越科技大學校園資訊系統</title>
-<link href="./css/css.css" rel="stylesheet" type="text/css">
-<script src="./js/jquery-1.9.1.min.js"></script>
-<script src="./js/js.js"></script>
-</head>
+        ?>
+        </ol>
+    <style>
+        .more-news a{
+            text-decoration:none;
+        }
+        .more-news a:hover{
+            text-decoration:underline;
+        }
 
-<body>
 
-                <div class="di" style="height:540px; border:#999 1px solid; width:53.2%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
-                
-                <!-- include marquee -->
-                <?php include "marquee.php";?>
+    </style>
+    <div class="more-news" style="text-align:center;">
+    <?php
+            if(($now-1)>0){
+                $p=$now-1;
+                echo "<a href='?do={$DB->table}&p=$p'> &lt; </a>";   
+            }else{
+                echo "<a href='?do={$DB->table}&p=$now'> &lt; </a>";   
+            }
 
-                    <div style="height:32px; display:block;"></div>
-                                        <!--正中央-->
-                        <div style="text-align:center;">
-    <a class="bl" style="font-size:30px;" href="?do=meg&p=0">&lt;&nbsp;</a>
-        <a class="bl" style="font-size:30px;" href="?do=meg&p=0">&nbsp;&gt;</a>
+
+            for($i=1;$i<=$pages;$i++){
+            if($i==$now){
+                $fontsize="24px";
+            }else{
+                $fontsize="16px";
+            }
+             echo "<a href='?do={$DB->table}&p=$i' style='font-size:$fontsize'> $i </a>";
+            }
+
+            if(($now+1)<=$pages){
+                $p=$now+1;
+                echo "<a href='?do={$DB->table}&p=$p'> &gt; </a>";   
+            }else{
+                echo "<a href='?do={$DB->table}&p=$now'> &gt; </a>";   
+
+            }
+        ?>
     </div>
-	                </div>
-
-</body></html>
+</div>
+<div id="alt"
+  style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;">
+</div>
+<script>
+$(".sswww").hover(
+    function() {
+        $("#alt").html("<pre>" + $(this).children(".all").html() + "</pre>").css({
+            "top": $(this).offset().top - 50
+        })
+        $("#alt").show()
+    }
+)
+$(".sswww").mouseout(
+    function() {
+        $("#alt").hide()
+    }
+)
+</script>

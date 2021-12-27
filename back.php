@@ -112,25 +112,8 @@ include_once "base.php"
 
 
                                                 </div>
-                <div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
-                    	
-						<!-- 這段可不要 功能:右鍵 -->
-						<script>
-						$(".sswww").hover(
-							function ()
-							{
-								$("#alt").html(""+$(this).children(".all").html()+"").css({"top":$(this).offset().top-50})
-								$("#alt").show()
-							}
-						)
-						$(".sswww").mouseout(
-							function()
-							{
-								$("#alt").hide()
-							}
-						)
-                        </script>
-						<!-- 不要的到這 -->
+
+
                              </div>
              	<div style="clear:both;"></div>
 				 <div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
